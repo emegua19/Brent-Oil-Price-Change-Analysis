@@ -1,0 +1,128 @@
+
+
+# Interim Report: Brent Oil Price Change Point Analysis (Task 1)
+
+**Author**: Yitbarek Geletaw
+**Date**: August 1, 2025
+**Challenge**: 10 Academy AI Mastery — Week 10
+**GitHub**: [https://github.com/emegua19/Brent-Oil-Price-Change-Analysis](https://github.com/emegua19/Brent-Oil-Price-Change-Analysis)
+
+---
+
+## Introduction
+
+This project analyzes Brent oil prices (1987–2022) to identify structural breaks using Bayesian change point detection with PyMC3. Task 1 focuses on data preparation, event compilation, and exploratory data analysis (EDA) to establish a robust foundation for modeling. The objective is to link price changes to geopolitical, economic, and OPEC events, providing insights for investors, policymakers, and energy companies.
+
+---
+
+## Task 1 Progress
+
+### Data Preprocessing
+
+Using `src/data_preparation/preprocess.py`, we:
+
+* Loaded Brent oil price data from `data/raw/brent_oil_prices.csv`
+* Converted dates to datetime format
+* Computed daily log returns to stabilize variance
+* Saved processed data with `Date`, `Price`, and `LogReturn` to `data/processed/brent_oil_log_returns.csv`
+* Validated format and return calculation via unit tests in `tests/test_preprocess.py`
+
+### Event Dataset
+
+We compiled 15 significant geopolitical, economic, and OPEC events from 2012–2022 (some earlier for context), saved in `data/processed/events.csv`.
+
+#### Table: Key Geopolitical and Economic Events Impacting Brent Oil Prices
+
+| Date       | Event Description                              | Event Type    |
+| ---------- | ---------------------------------------------- | ------------- |
+| 2012-01-01 | Iran threatens Strait of Hormuz closure        | Geopolitical  |
+| 2014-06-01 | ISIS captures oil fields in Iraq               | Geopolitical  |
+| 2014-11-27 | OPEC decides against production cut            | Economic/OPEC |
+| 2015-07-14 | Iran nuclear deal reached                      | Geopolitical  |
+| 2016-01-16 | Iran sanctions lifted                          | Geopolitical  |
+| 2016-11-30 | OPEC agrees to production cut                  | Economic/OPEC |
+| 2018-05-08 | US withdraws from Iran nuclear deal            | Geopolitical  |
+| 2019-09-14 | Saudi Aramco drone attack                      | Geopolitical  |
+| 2020-01-03 | US airstrike kills Iranian general             | Geopolitical  |
+| 2020-03-06 | OPEC+ fails to agree on cuts; price war begins | Economic/OPEC |
+| 2020-04-12 | OPEC+ agrees to historic production cut        | Economic/OPEC |
+| 2021-01-20 | US rejoins Paris Climate Agreement             | Policy        |
+| 2022-02-24 | Russia invades Ukraine                         | Geopolitical  |
+| 2022-03-02 | EU imposes sanctions on Russia                 | Geopolitical  |
+| 2022-03-31 | US releases strategic petroleum reserve        | Policy        |
+
+### Exploratory Data Analysis (EDA)
+
+EDA was conducted in `notebooks/exploratory_analysis.ipynb`, generating:
+
+* **Price Trends**: Shows Brent oil price history with major peaks and crashes (e.g., 2014 peak, 2020 crash).
+* **Log Returns**: Visualizes daily log returns and highlights volatility clustering during global events.
+* **Event Overlays**: Event markers placed on price charts to visualize potential impact (e.g., 2022 Russia-Ukraine war).
+* **Stationarity Tests**: ADF tests confirm that prices are non-stationary (p > 0.05) but log returns are stationary (p < 0.05).
+
+#### Figures:
+
+* `img/brent_price_trend.png`: Brent Oil Price Trends (1987–2022)
+* `img/log_returns.png`: Daily Log Returns of Brent Oil Prices
+* `img/price_with_events.png`: Brent Oil Prices with Key Events
+
+---
+
+## Planned Steps
+
+### Task 1 (Completed)
+
+* Preprocessed Brent oil price data
+* Compiled and structured 15 key events
+* Created EDA with key visualizations and stationarity tests
+* Added unit tests for validation
+
+### Task 2: Bayesian Modeling (Planned: August 4–6, 2025)
+
+* Implement change point detection using PyMC3 in `src/analysis/change_point_model.py`
+* Save change points to `results/change_points.csv`
+* Match and save related events to `results/matched_events.csv`
+
+### Task 3: Dashboard Development (Planned: August 7–10, 2025)
+
+* Develop Flask API in `src/backend/app.py` to serve model output
+* Build interactive React dashboard in `src/frontend/`
+* Deploy locally or to a cloud environment
+
+---
+
+## Assumptions and Limitations
+
+### Assumptions
+
+* Log returns better stabilize data for structural break modeling (confirmed by ADF test)
+* The curated events are major influencers of price shifts
+
+### Limitations
+
+* Limited to 15 major events; smaller events may be excluded
+* Event-price correlations do not imply causation (VAR models could improve analysis)
+* Daily data granularity may miss intraday impacts
+
+---
+
+## Communication Plan
+
+* Weekly progress updates via `#all-week10` Slack channel
+* Interim submission includes:
+
+  * `reports/interim_report.pdf`
+  * `data/processed/events.csv`
+  * [GitHub Repository](https://github.com/emegua19/Brent-Oil-Price-Change-Analysis)
+* Final deliverables due August 10, 2025:
+
+  * Final report
+  * Interactive dashboard
+  * Presentation
+
+---
+
+## Conclusion
+
+Task 1 successfully established the data pipeline, event dataset, and EDA framework. The project is on schedule for completing the Bayesian modeling and dashboard deployment phases.
+
