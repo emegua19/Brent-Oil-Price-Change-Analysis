@@ -1,0 +1,23 @@
+# Core Python Data Stack
+pandas
+numpy
+matplotlib
+seaborn
+
+# Bayesian Modeling
+pymc3
+theano-pymc  # backend for PyMC3
+arviz       # diagnostic plots and inference summaries
+
+# Flask Backend
+Flask
+Flask-Cors
+
+# Frontend (React is installed separately via npm)
+# No need to include React in Python requirements
+
+# Testing
+pytest
+
+# Development tools
+python-dotenv
