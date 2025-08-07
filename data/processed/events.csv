@@ -1,0 +1,16 @@
+Date,Event_Description,Event_Type
+1987-07-01,Iran-Iraq War tanker attacks disrupt Persian Gulf oil exports,Geopolitical
+1990-08-02,"Iraq invades Kuwait, leading to Gulf War and oil price spike",Geopolitical
+2003-03-20,US invasion of Iraq disrupts oil production,Geopolitical
+2008-09-15,Global financial crisis triggers oil demand collapse,Economic
+2011-02-15,Arab Spring and Libyan civil war reduce oil supply,Geopolitical
+2014-11-27,"OPEC maintains production, causing price drop due to supply glut",OPEC
+2015-12-04,"OPEC abandons production quotas, flooding market",OPEC
+2018-05-08,"US withdraws from Iran nuclear deal, reimposing sanctions",Sanction
+2019-09-14,Drone attacks on Saudi Arabia’s Abqaiq facility disrupt 5% of global supply,Geopolitical
+2020-03-06,"OPEC+ fails to agree on production cuts, triggering price war",OPEC
+2020-04-20,COVID-19 pandemic causes negative WTI oil prices,Economic
+2021-10-01,OPEC+ agrees to gradual production increases post-COVID,OPEC
+2022-02-24,"Russia invades Ukraine, spiking oil prices",Geopolitical
+2022-10-05,OPEC+ cuts production by 2 million barrels per day,OPEC
+2023-04-02,OPEC+ announces surprise production cuts of 1.1 million barrels per day,OPEC
