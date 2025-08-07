@@ -1,0 +1,81 @@
+# Brent Oil Price Change Point Analysis  
+**10 Academy AI Mastery Program – Week 10**  
+**Author:** Yitbarek Geletaw  
+**Date:** August 7, 2025  
+**GitHub:** [https://github.com/emegua19/Brent-Oil-Price-Change-Analysis](https://github.com/emegua19/Brent-Oil-Price-Change-Analysis)  
+
+---
+
+## Abstract  
+This report details the analysis of Brent oil prices from 1987 to 2023, identifying structural breaks using Bayesian change point modeling with PyMC. The study correlates these breakpoints with geopolitical and economic events, providing insights into market dynamics. An interactive dashboard, developed with Flask and React, allows stakeholders to explore the data visually.
+
+---
+
+## 1. Introduction  
+Brent oil, a global benchmark, is influenced by events such as wars and economic crises. This project uses historical data to detect change points and offers an interactive dashboard for analysis.
+
+---
+
+## 2. Task 1: Data Foundation and Exploratory Analysis  
+- **Data Cleaning:** Interpolated missing values, calculated log returns, and capped outliers at ±5 × standard deviation.  
+- **Event Annotation:** Added 15 key events to the dataset.  
+- **EDA Findings:** Trends, volatility clusters, and event-linked movements were identified.  
+
+**Figures:**  
+![Price trends from EDA](../we10_img/brent_price_trend.png)  
+*Figure 1: Price trends from exploratory data analysis.*
+
+![Price trends with events](../we10_img/price_with_events.png)  
+*Figure 2: Price trends with annotated events.*
+
+---
+
+## 3. Task 2: Change Point Modeling and Insight Generation  
+A Bayesian model with PyMC identified three major change points:
+
+| Change Point Date | Event Date  | Event Description            | Event Type    | Mean Before | Impact (%) |
+|-------------------|------------|------------------------------|---------------|-------------|------------|
+| 1990-08-02        | 1990-08-02 | Iraq invades Kuwait          | Geopolitical  | -0.000200   | +850.00    |
+| 2003-03-20        | 2003-03-20 | US invasion of Iraq          | Geopolitical  | 0.001500    | -46.67     |
+| 2008-09-15        | 2008-09-15 | Global Financial Crisis      | Economic      | 0.000800    | -250.00    |
+
+**Figures:**  
+![Trace plot for model convergence](../we10_img/change_point_trace.png)  
+*Figure 3: Trace plot for model convergence.*
+
+![Log returns with change points](../we10_img/log_returns_change_point.png)  
+*Figure 4: Log returns with change points.*
+
+---
+
+## 4. Task 3: Interactive Dashboard  
+- **Backend:** Flask serving APIs (`/log-returns`, `/change-points`, `/matched-events`).  
+- **Frontend:** React with Recharts & Tailwind CSS.  
+- **Features:**  
+  - Log returns & volatility charts  
+  - Date range picker  
+  - Event type filter & keyword search  
+  - Zoom & pan interactions  
+
+**Screenshots:**  
+![Dashboard main view](../we10_img/brent_oil_change_point_dashboard.png)  
+*Figure 5: Log returns chart with change points and events.*
+
+![Volatility chart](../we10_img/brent_oil_change_point_dashboard_1.png)  
+*Figure 6: Volatility chart with filters.*
+
+![Log return chart](../we10_img/log_return_chart_w_change_point.png)  
+*Figure 7: Log return chart with change points.*
+
+![Log returns overview](../we10_img/log_returns.png)  
+*Figure 8: Log returns overview.*
+
+---
+
+## 5. Conclusion  
+This analysis underscores the impact of global events on Brent oil prices, with the dashboard enhancing exploration. Future work could integrate real-time data feeds or expand to other commodity markets.
+
+---
+
+## 6. GitHub Repository  
+📂 **Code & resources:** [https://github.com/emegua19/Brent-Oil-Price-Change-Analysis](https://github.com/emegua19/Brent-Oil-Price-Change-Analysis)
