@@ -23,19 +23,11 @@ __pycache__/
 
 # Data
 data/raw/
+data/processed/
 data/external/
 results/
-
-# Ignore all CSV/JSON except the ones needed for CI
 *.csv
 *.json
-!data/processed/events.csv
-!data/processed/brent_oil_log_returns.csv
-
-# Keep processed directory but ignore other files in it
-data/processed/*
-!data/processed/events.csv
-!data/processed/brent_oil_log_returns.csv
 
 # Frontend build
 node_modules/
