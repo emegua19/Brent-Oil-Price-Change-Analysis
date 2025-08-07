@@ -23,10 +23,9 @@ __pycache__/
 
 # Data
 data/raw/
-data/processed/
 data/external/
 results/
-*.csv
+
 *.json
 
 # Frontend build
