@@ -1,163 +1,164 @@
+#  Brent Oil Price Change Point Analysis
 
-# Brent Oil Price Change Point Analysis
+This project analyzes historical Brent oil prices (1987–2022) to detect significant structural breaks using **Bayesian change point modeling with PyMC**. These breakpoints are matched with **geopolitical, economic, and OPEC-related events** to uncover the influence of real-world happenings on oil markets. An interactive **dashboard built with Flask and React** helps stakeholders explore the insights.
 
-This project analyzes historical Brent oil prices (1987–2022) to identify structural breaks using Bayesian change point detection with PyMC3. It links price changes to major geopolitical, economic, and OPEC events, providing insights for investors, policymakers, and energy companies.
-
-This repository contains the interim submission for Task 1 of the 10 Academy AI Mastery Week 10 Challenge (July 30–August 5, 2025).
+>  Final submission for the 10 Academy AI Mastery Week 10 Challenge (July 30–August 7, 2025)
 
 ---
 
-## Project Structure
+## 🗂️ Project Structure
 
 ```
 
 project\_root/
 ├── data/
-│   ├── raw/
-│   │   └── brent\_oil\_prices.csv              # Original historical price data
-│   ├── processed/
-│   │   └── events.csv                        # Curated event dataset (Date, Description)
-│   └── external/                             # Optional: additional macroeconomic data
+│   ├── raw/                          # Original Brent oil price data
+│   ├── processed/                    # Cleaned prices, events, log returns
+│   └── external/                     # Optional macroeconomic indicators
 ├── results/
-│   └── figures/
-        |--trace_plots
-    │       ├── price\_trends.png
-    │       ├── volatility\_plot.png
-    │       └── price\_with\_events.png
+│   ├── figures/                      # Visualizations
+│   └── change\_points.csv             # Model-detected breakpoints
 ├── src/
-│   ├── data\_preparation/
-│   │   └── preprocess.py                     # Data loading & cleaning functions
-│   ├── analysis/
-│   │   └── change\_point\_model.py             # PyMC3 modeling logic
-│   ├── utils/
-│   │   └── helpers.py                        # Utility functions (dates, log returns, etc.)
-│   ├── backend/
-│   │   ├── app.py                            # Flask backend entry point
-│   │   └── api/
-│   │       └── data\_api.py                   # API routes to serve model results
-│   └── frontend/
-│       ├── public/
-│       │   └── index.html
-│       ├── src/
-│       │   ├── components/
-│       │   │   ├── PriceChart.jsx
-│       │   │   ├── EventFilter.jsx
-│       │   │   └── Dashboard.jsx
-│       │   ├── App.jsx
-│       │   └── index.js
-│       └── package.json
+│   ├── data\_preparation/             # Cleaning logic
+│   ├── analysis/                     # Bayesian modeling (PyMC)
+│   ├── backend/                      # Flask backend (APIs)
+├── frontend/                         # React frontend (dashboard)
+│   ├── public/
+│   └── src/
 ├── notebooks/
-│   └── exploratory\_analysis.ipynb            # EDA and insights exploration
+│   └── exploratory\_analysis.ipynb    # EDA notebook
 ├── reports/
-│   ├── interim\_report.pdf                    # Task 1 deliverable (analysis plan, events)
-│   └── final\_report.pdf                      # Final blog-style report or PDF
-├── tests/
-│   ├── test\_preprocess.py                    # Unit tests for data pipeline
-│   ├── test\_model.py                         # Tests for modeling logic
-│   └── test\_api.py                           # API endpoint tests
-├── docs/
-│   ├── project\_overview\.md                   # Project design, architecture
-│   └── data\_sources.md
-├── requirements.txt                          # Python dependencies
-├── README.md                                 # Project intro, setup instructions
-└── .gitignore                                # Ignore checkpoints, virtual envs, builds
+│   ├── interim\_report.pdf
+│   └── final\_report.pdf
+├── tests/                            # Unit and API tests
+│   ├── test\_preprocess.py
+│   ├── test\_model.py
+│   └── test\_api.py
+├── requirements.txt
+└── README.md
 
 ````
 
 ---
 
-## Task 1: Laying the Foundation
+##  Task Overview
 
-- **Preprocessed Data**: Loaded and cleaned `brent_oil_prices.csv`, computed log returns, and saved to `data/processed/brent_oil_log_returns.csv`.
-- **Event Dataset**: Compiled 15 significant geopolitical, economic, and OPEC events (2012–2022 and earlier) in `data/processed/events.csv`.
-- **Exploratory Data Analysis**:
-  - Visualized trends, log returns, and events (`notebooks/exploratory_analysis.ipynb`)
-  - Conducted ADF test confirming non-stationary prices and stationary log returns.
-- **Workflow & Assumptions**: Described steps, assumptions (e.g., log returns stabilize data), and limitations (e.g., correlation ≠ causation) in `reports/interim_report.pdf`.
+### Task 1: Laying the Foundation
+- Cleaned and transformed historical oil data.
+- Calculated daily **log returns** to stabilize variance.
+- Collected and annotated **15 real-world events** (wars, sanctions, OPEC decisions).
+- Performed **exploratory data analysis (EDA)**.
+
+### Task 2: Bayesian Change Point Modeling
+- Used **PyMC4** to implement Bayesian model for detecting structural breaks.
+- Estimated date of change (`tau`), and mean/std deviations before and after.
+- Matched detected change points with events.
+- Saved model trace and summary to `results/`.
+
+### Task 3: Interactive Dashboard (Flask + React)
+- Built a backend using **Flask** to serve API endpoints:
+  - `/log-returns`, `/change-points`, `/matched-events`
+- Created a frontend using **React + Recharts**:
+  -  Log return chart with **red lines** for change points and **green lines** for matched events.
+  -  **Date range filters**
+  -  **Event category filters and search**
+  -  **Zoom & pan**
+  -  **Summary statistics (mean, volatility, std dev)**
 
 ---
 
-## Visuals
+##  Quickstart
 
-Plots saved in `results/figures/`:
-
-- `price_trends.png`: Brent oil price trends (1987–2022)
-- `volatility_plot.png`: Daily log returns with volatility clustering
-- `price_with_events.png`: Prices with event markers (e.g., 2014 OPEC decision, 2022 Russia-Ukraine war)
-
----
-
-## Setup
-
-### Clone the Repository
+### 1. Clone the repo
 
 ```bash
 git clone https://github.com/emegua19/Brent-Oil-Price-Change-Analysis.git
-cd project_root
+cd Brent-Oil-Price-Change-Analysis
 ````
 
-### Set Up Python Environment
+### 2. Set up virtual environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate       # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Run Preprocessing
+### 3. Run Preprocessing
 
 ```bash
 python src/data_preparation/preprocess.py
 ```
 
-### Run Exploratory Analysis
+### 4. Run Bayesian Change Point Model
 
 ```bash
-jupyter notebook notebooks/exploratory_analysis.ipynb
+python src/analysis/change_point_model.py
 ```
 
-### Run Unit Tests
+### 5. Start the Flask Backend
 
 ```bash
-PYTHONPATH=$PWD/src pytest tests/test_preprocess.py -v
+python src/backend/app.py
+```
+
+API will be available at: [http://localhost:5000](http://localhost:5000)
+
+### 6. Launch the React Frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Frontend will run at: [http://localhost:3000](http://localhost:3000)
+
+---
+
+##  Testing
+
+Run unit and API tests:
+
+```bash
+pytest tests/ -v
 ```
 
 ---
 
-## Dependencies
+##  Visual Highlights
 
-Key packages listed in `requirements.txt`:
-
-* `pandas>=1.5.0`
-* `numpy>=1.23.0`
-* `matplotlib>=3.5.0`
-* `seaborn>=0.11.0`
-* `statsmodels>=0.13.0`
-* `pytest>=7.0.0`
+* `price_trends.png`: Long-term oil trends
+* `volatility_plot.png`: Volatility of daily log returns
+* `price_with_events.png`: Annotated spikes with global events
 
 ---
 
-## Interim Submission
+##  Dependencies (selected)
 
-* **Report**: `reports/interim_report.pdf` (workflow, assumptions, event dataset)
-* **Event Dataset**: `data/processed/events.csv` (15 events)
-* **Code**:
-
-  * `notebooks/exploratory_analysis.ipynb`
-  * `src/data_preparation/preprocess.py`
-  * `src/utils/helpers.py`
-  * `tests/test_preprocess.py`
-* **GitHub**: *(https://github.com/emegua19/Brent-Oil-Price-Change-Analysis.git)*
+* **Modeling**: `pymc3`, `theano-pymc`, `arviz`
+* **Visualization**: `matplotlib`, `seaborn`, `recharts`
+* **Backend**: `Flask`, `Flask-Cors`
+* **Frontend**: `React`, `Recharts`
+* **Testing**: `pytest`
 
 ---
 
-## Next Steps
+## 📄 Reports
 
-Proceed to **Task 2**: Implement Bayesian change point model in `src/analysis/change_point_model.py` using PyMC3 to detect structural breaks and match them with real-world events.
+* `reports/interim_report.pdf`: EDA, assumptions, event selection
+* `reports/final_report.pdf`: Change point modeling + dashboard insights
 
 ---
 
-## License
+##  License
 
-For educational purposes as part of **10 Academy AI Mastery**. All rights reserved.
+For educational use under **10 Academy AI Mastery Program**. Attribution required for reuse.
 
+---
+
+## 👤 Author
+
+**Yitbarek Geletaw**
+Brent Oil Analysis — 10 Academy (Week 10)
+GitHub: [emegua19](https://github.com/emegua19)
